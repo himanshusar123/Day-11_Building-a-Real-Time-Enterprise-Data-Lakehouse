@@ -16,6 +16,11 @@ if not os.environ.get("HADOOP_HOME") and os.path.exists(local_hadoop_path):
     os.environ["HADOOP_HOME"] = local_hadoop_path
     os.environ["PATH"] = os.path.join(local_hadoop_path, "bin") + os.path.pathsep + os.environ.get("PATH", "")
 
+# Configure PySpark to use the active virtual environment's Python executable
+os.environ["PYSPARK_PYTHON"] = sys.executable
+os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
+
+
 from pyspark.sql import SparkSession
 
 def main():
