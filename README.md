@@ -29,6 +29,7 @@ Day-11_Building-a-Real-Time-Enterprise-Data-Lakehouse/
 ├── requirements.txt     # Project dependencies
 ├── producer.py          # Simulated telemetry event generator
 ├── spark_lakehouse.py   # Streaming ingestion pipeline from Kafka into Iceberg
+├── dashboard.py         # Streamlit Operations Dashboard displaying Iceberg table KPIs
 ├── hands_on_lab.py      # Interactive lab scripts (DML, Time Travel, Evolution)
 └── README.md            # Lab instructions (This file)
 ```
@@ -113,7 +114,23 @@ Iceberg handles this on the fly without table reconstruction, unlike traditional
 
 ---
 
+## 📊 Exercise 3: View Real-Time Operations Dashboard
+
+To visualize the ingestion data in real-time, you can start the Streamlit dashboard. It uses a cached Spark Session connected to the Iceberg warehouse:
+
+```bash
+streamlit run dashboard.py
+```
+
+### Dashboard Features:
+* **Real-time Refresh**: Automatically updates every 5 seconds to query new records ingested by `spark_lakehouse.py`.
+* **KPI Metrics**: Displays total shipment count, aggregated revenue, average weight, and active vehicles.
+* **Interactive Charts**: Interactive Plotly bar and pie charts showing destination breakdown, shipment status, and priority distribution.
+
+---
+
 ## 💡 Key Discussion Questions
 1. How does Apache Iceberg differ from traditional Hive partition layouts?
 2. What are the benefits of *Hidden Partitioning*?
 3. How does the metadata layer prevent "partial writes" during streaming failures?
+
