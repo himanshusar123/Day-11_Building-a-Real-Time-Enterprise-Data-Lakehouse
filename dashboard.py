@@ -67,13 +67,15 @@ try:
     spark = get_spark_session()
     
     # Query database and table presence
-    db_exists = spark.sql("SHOW DATABASES LIKE 'db'").count() > 0
     table_exists = False
-    if db_exists:
+    try:
         table_exists = spark.sql("SHOW TABLES IN local.db LIKE 'shipments'").count() > 0
+    except Exception:
+        table_exists = False
         
     if not table_exists:
         st.warning("⚠️ Apache Iceberg table `local.db.shipments` not found! Please run the ingestion job (`python spark_lakehouse.py`) to generate data.")
+
     else:
         # Load data from Iceberg table into Pandas
         df = spark.sql("SELECT * FROM local.db.shipments").toPandas()
