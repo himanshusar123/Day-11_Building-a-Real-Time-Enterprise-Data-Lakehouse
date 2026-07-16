@@ -1,0 +1,15 @@
+# Virtual Environment
+venv/
+.venv/
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Spark Checkpoints & Warehouses
+checkpoints/
+warehouse/
+
+# Generated Data files & HTML Reports (keep code clean)
+day-12-smartretail-data-quality/data/
+day-12-smartretail-data-quality/validation_report.html
